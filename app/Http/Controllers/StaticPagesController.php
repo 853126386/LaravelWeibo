@@ -16,6 +16,7 @@ class StaticPagesController extends Controller
     public function help(){
         return '帮助';
     }
+
     public function about(){
         return '关于';
     }
