@@ -7,6 +7,14 @@ use App\Models\User;
 use Auth;
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => ['show', 'create', 'store']
+        ]);
+    }
+
     //
 
     public function __construct()
@@ -48,6 +56,7 @@ class UsersController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(User $user){
+        $this->authorize('update',$user);
         return  view('users.edit',compact('user'));
     }
 
@@ -56,6 +65,7 @@ class UsersController extends Controller
      * @param Request $request
      */
     public function update(User $user,Request $request){
+        $this->authorize('update',$user);
         $this->validate($request,[
            'name'=>'required|max:50',
            'password'=>'required|confirmed|min:6',
