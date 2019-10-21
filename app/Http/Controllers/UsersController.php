@@ -11,12 +11,17 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth', [
-            'except' => ['show', 'create', 'store']
+            'except' => ['show', 'create', 'store', 'index']
         ]);
     }
 
-    //
-
+    public function index(){
+        $users=User::all();
+        return view('users.index',compact('users'));
+    }
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create(){
         return view('users/create');
     }
