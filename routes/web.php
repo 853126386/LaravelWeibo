@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', 'StaticPagesController@home')->name('home');
 Route::get('/help', 'StaticPagesController@help')->name('help');
 Route::get('/about', 'StaticPagesController@about')->name('about');
@@ -27,3 +28,4 @@ Route::delete('logout', 'SessionController@destroy')->name('logout');
 
 
 Route::get('users/{user}/edit', 'UsersController@edit')->name('users.edit');
+

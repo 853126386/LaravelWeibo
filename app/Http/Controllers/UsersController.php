@@ -15,6 +15,7 @@ class UsersController extends Controller
         ]);
     }
 
+
     public function index(){
         $users=User::all();
         return view('users.index',compact('users'));
@@ -22,6 +23,7 @@ class UsersController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function create(){
         return view('users/create');
     }
