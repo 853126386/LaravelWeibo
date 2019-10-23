@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 class SessionController extends Controller
 {
     //
@@ -25,10 +25,17 @@ class SessionController extends Controller
            'password'=>'required',
         ]);
         if (Auth::attempt($credentials,$request->has('remember'))) {
-            session()->flash('success','欢迎回来');
+            if(Auth::user()->activated){
+                session()->flash('success','欢迎回来');
 
-            $fallback = route('users.show', Auth::user());
-            return redirect()->intended($fallback);
+                $fallback = route('users.show', Auth::user());
+                return redirect()->intended($fallback);
+            }else{
+                Auth::logout();
+                session()->flash('warning', '你的账号未激活，请检查邮箱中的注册邮件进行激活。');
+                return redirect('/');
+            }
+
             // 登录成功后的相关操作
         } else {
             session()->flash('danger','很抱歉！你的邮箱或者密码错误');
