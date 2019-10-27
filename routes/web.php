@@ -43,6 +43,10 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::resource('statuses','StatusesController')->only(['store','destroy']);
 
 
-
+//获取粉丝和关注的人
 Route::get('/users/{user}/followers','UsersController@followers')->name('users.followers');
 Route::get('/users/{user}/followings','UsersController@followings')->name('users.followings');
+
+
+Route::post('/users/followers/{user}', 'FollowersController@store')->name('followers.store');
+Route::delete('/users/followers/{user}', 'FollowersController@destroy')->name('followers.destroy');
